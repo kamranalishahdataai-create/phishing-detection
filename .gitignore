@@ -69,8 +69,12 @@ frontend/dist/
 htmlcov/
 .pytest_cache/
 
-# Model checkpoint files (large files - use Git LFS or keep tracked)
-# Uncomment if you don't want to track model files
-# *.pt
-# *.safetensors
-# *.npy
+# Large checkpoint files (not needed for deployment)
+electra_url_model/checkpoint-*/
+electra_url_model/runs/
+electra_url_model/training_args.bin
+
+# Large CSV data files (not needed for deployment)
+mega_ensemble/*.csv
+phish_analysis/*.csv
+phish_quick_run/*_split.csv
