@@ -1,13 +1,13 @@
 # Phishing Detection Backend
 # Requirements for Render.com Free Tier Deployment
-# Optimized for limited memory (512MB)
+# Optimized for Python 3.13 and limited memory (512MB)
 
 # Web Framework
-fastapi==0.109.0
-uvicorn[standard]==0.27.0
-pydantic==2.5.3
-pydantic-settings==2.1.0
-python-multipart==0.0.6
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+pydantic>=2.6.0
+pydantic-settings>=2.1.0
+python-multipart>=0.0.6
 
 # Machine Learning (CPU-only for free tier)
 --extra-index-url https://download.pytorch.org/whl/cpu
