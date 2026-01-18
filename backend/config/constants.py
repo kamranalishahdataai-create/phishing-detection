@@ -42,6 +42,13 @@ HIGH_TRUST_DOMAINS: Set[str] = {
     "ebay.com", "walmart.com", "target.com", "bestbuy.com",
     "shopify.com", "etsy.com", "rakuten.com", "flipkart.com",
     
+    # Travel & Booking
+    "airbnb.com", "ar.airbnb.com", "booking.com", "expedia.com", "tripadvisor.com",
+    "hotels.com", "kayak.com", "skyscanner.com", "trivago.com", "vrbo.com",
+    "agoda.com", "hostelworld.com", "priceline.com", "orbitz.com",
+    "united.com", "delta.com", "aa.com", "southwest.com", "jetblue.com",
+    "ryanair.com", "easyjet.com", "lufthansa.com", "britishairways.com",
+    
     # News & Media
     "cnn.com", "bbc.com", "bbc.co.uk", "nytimes.com", "washingtonpost.com",
     "theguardian.com", "reuters.com", "bloomberg.com", "forbes.com",
