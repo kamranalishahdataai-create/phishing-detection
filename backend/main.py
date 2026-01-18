@@ -85,28 +85,13 @@ async def lifespan(app: FastAPI):
     logger.info(f"Debug Mode: {settings.DEBUG}")
     logger.info("=" * 60)
     
-    # Load models
-    logger.info("Loading ML models...")
-    start_time = time.time()
-    
-    try:
-        predictor = get_ensemble_predictor()
-        model_status = predictor.load_models()
-        
-        load_time = time.time() - start_time
-        logger.info(f"Models loaded in {load_time:.2f}s")
-        logger.info(f"Model status: {model_status}")
-        
-        if not any(model_status.values()):
-            logger.warning("No models loaded! Service will run in limited mode.")
-        
-    except Exception as e:
-        logger.error(f"Failed to load models: {e}")
-        logger.warning("Service starting without models - limited functionality")
-    
     # Store startup time for stats
     app.state.startup_time = datetime.utcnow()
     app.state.request_count = 0
+    app.state.models_loaded = False
+    
+    # Load models in background (don't block startup)
+    logger.info("Models will be loaded on first request...")
     
     logger.info("Server startup complete!")
     
@@ -244,10 +229,14 @@ async def health_check():
             "timestamp": datetime.utcnow().isoformat()
         }
     except Exception as e:
-        return JSONResponse(
-            status_code=503,
-            content={"status": "unhealthy", "error": str(e)}
-        )
+        logger.error(f"Health check error: {e}")
+        return {
+            "status": "starting",
+            "models_loaded": False,
+            "version": settings.APP_VERSION,
+            "timestamp": datetime.utcnow().isoformat(),
+            "note": "Models loading..."
+        }
 
 
 # Readiness probe (for Kubernetes)
