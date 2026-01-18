@@ -1,0 +1,81 @@
+version: '3.8'
+
+services:
+  phishing-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: phishing-detection-api
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=false
+      - ENVIRONMENT=production
+      - MODEL_DEVICE=cpu
+      - LOG_LEVEL=INFO
+    volumes:
+      # Mount model directories
+      - ../electra_url_model:/app/electra_url_model:ro
+      - ../biformer_url_model:/app/biformer_url_model:ro
+      - ../phish_quick_run:/app/phish_quick_run:ro
+      # Persistent storage for database and logs
+      - ./data:/app/data
+      - ./logs:/app/logs
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4G
+        reservations:
+          cpus: '1'
+          memory: 2G
+
+  # Optional: Redis for caching
+  redis:
+    image: redis:7-alpine
+    container_name: phishing-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # Optional: PostgreSQL for production database
+  postgres:
+    image: postgres:15-alpine
+    container_name: phishing-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=phishing
+      - POSTGRES_PASSWORD=secure_password_change_me
+      - POSTGRES_DB=phishing_db
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U phishing"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  redis-data:
+  postgres-data:
+
+networks:
+  default:
+    name: phishing-network

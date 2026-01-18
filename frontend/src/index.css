@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #0d1117;
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #151c28;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4A9FD4;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3B7FAA;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #4A9FD4 0%, #5BC0DE 50%, #4A9FD4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass effect */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Button animations */
+.btn-primary {
+  @apply bg-primary-500 hover:bg-primary-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-primary-500/25;
+}
+
+.btn-secondary {
+  @apply bg-dark-300 hover:bg-dark-200 text-white font-semibold py-3 px-6 rounded-lg border border-gray-700 transition-all duration-300;
+}
+
+/* Card hover effects */
+.feature-card {
+  @apply bg-white rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/10 hover:-translate-y-1;
+}
+
+/* FAQ accordion */
+.faq-item {
+  @apply border-b border-gray-200 last:border-b-0;
+}
+
+/* Pricing card */
+.pricing-card {
+  @apply rounded-2xl p-8 transition-all duration-300;
+}
+
+.pricing-card.featured {
+  @apply bg-primary-500 text-white transform scale-105 shadow-2xl shadow-primary-500/30;
+}
+
+/* Animation classes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-delay-100 { animation-delay: 0.1s; }
+.animate-delay-200 { animation-delay: 0.2s; }
+.animate-delay-300 { animation-delay: 0.3s; }
+.animate-delay-400 { animation-delay: 0.4s; }
+.animate-delay-500 { animation-delay: 0.5s; }
