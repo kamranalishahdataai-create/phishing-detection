@@ -10,13 +10,13 @@ from enum import Enum
 from loguru import logger
 import numpy as np
 
-from backend.config.settings import settings
-from backend.config.constants import PhishingStatus, RiskLevel
-from backend.models.electra_model import get_electra_model, ElectraURLModel
-from backend.models.biformer_model import get_biformer_model, BiformerURLModel
-from backend.models.lgbm_model import get_lgbm_model, LGBMURLModel
-from backend.services.domain_trust import domain_trust_evaluator, TrustEvaluation
-from backend.services.feature_extractor import url_feature_extractor, URLFeatures
+from config.settings import settings
+from config.constants import PhishingStatus, RiskLevel
+from models.electra_model import get_electra_model, ElectraURLModel
+from models.biformer_model import get_biformer_model, BiformerURLModel
+from models.lgbm_model import get_lgbm_model, LGBMURLModel
+from services.domain_trust import domain_trust_evaluator, TrustEvaluation
+from services.feature_extractor import url_feature_extractor, URLFeatures
 
 
 class PredictionSource(Enum):

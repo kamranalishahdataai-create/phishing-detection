@@ -28,7 +28,7 @@ except ImportError:
     DNS_AVAILABLE = False
     logger.warning("dnspython not installed. DNS checks disabled.")
 
-from backend.config.settings import settings
+from config.settings import settings
 
 
 @dataclass

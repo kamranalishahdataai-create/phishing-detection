@@ -12,7 +12,7 @@ from pathlib import Path
 import numpy as np
 from loguru import logger
 
-from backend.config.settings import settings
+from config.settings import settings
 
 
 class BiformerURLEncoder(nn.Module):

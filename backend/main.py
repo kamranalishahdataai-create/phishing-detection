@@ -5,6 +5,7 @@ Phishing Detection Backend Server
 
 import sys
 import time
+import os
 from pathlib import Path
 from contextlib import asynccontextmanager
 from datetime import datetime
@@ -14,14 +15,19 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from loguru import logger
 
-# Add backend to path
+# Add project root to path for imports
+project_root = Path(__file__).resolve().parent.parent
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
+# Also add backend directory for relative imports
 backend_dir = Path(__file__).resolve().parent
 if str(backend_dir) not in sys.path:
-    sys.path.insert(0, str(backend_dir.parent))
+    sys.path.insert(0, str(backend_dir))
 
-from backend.config.settings import settings
-from backend.api.routes import router as api_router
-from backend.services.ensemble_predictor import get_ensemble_predictor
+from config.settings import settings
+from api.routes import router as api_router
+from services.ensemble_predictor import get_ensemble_predictor
 
 
 # =============================================================================

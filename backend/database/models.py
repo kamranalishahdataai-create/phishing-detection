@@ -14,7 +14,7 @@ from sqlalchemy.orm import sessionmaker, relationship
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
 
-from backend.config.settings import settings
+from config.settings import settings
 
 
 # Base class for models

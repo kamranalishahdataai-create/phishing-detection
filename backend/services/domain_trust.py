@@ -15,7 +15,7 @@ from enum import Enum
 import tldextract
 from loguru import logger
 
-from backend.config.constants import (
+from config.constants import (
     HIGH_TRUST_DOMAINS,
     MEDIUM_TRUST_DOMAINS,
     GOVERNMENT_TLD_PATTERNS,

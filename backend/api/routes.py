@@ -8,7 +8,7 @@ from datetime import datetime
 from loguru import logger
 import asyncio
 
-from backend.api.schemas import (
+from api.schemas import (
     URLScanRequest,
     BatchScanRequest,
     WebpageScanRequest,
@@ -29,10 +29,10 @@ from backend.api.schemas import (
     URLFeaturesResponse,
     TrustLevelEnum,
 )
-from backend.services.ensemble_predictor import get_ensemble_predictor, EnsemblePrediction
-from backend.services.domain_trust import domain_trust_evaluator
-from backend.services.feature_extractor import url_feature_extractor
-from backend.config.settings import settings
+from services.ensemble_predictor import get_ensemble_predictor, EnsemblePrediction
+from services.domain_trust import domain_trust_evaluator
+from services.feature_extractor import url_feature_extractor
+from config.settings import settings
 
 
 # Create router

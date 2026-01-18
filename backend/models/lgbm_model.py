@@ -10,8 +10,8 @@ from loguru import logger
 
 import lightgbm as lgb
 
-from backend.config.settings import settings
-from backend.services.feature_extractor import url_feature_extractor
+from config.settings import settings
+from services.feature_extractor import url_feature_extractor
 
 
 class LGBMURLModel:
